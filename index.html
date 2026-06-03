@@ -7,17 +7,17 @@
 
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght=300;400;500;600;700;800&display=swap" rel="stylesheet">
 
 <style>
 :root {
-    --bg-main: #050816;
-    --bg-card: rgba(255, 255, 255, 0.04);
-    --bg-card-hover: rgba(255, 255, 255, 0.07);
-    --primary: #00f7ff;
-    --accent: #8a2eff;
+    --bg-main: #020503; 
+    --bg-card: rgba(255, 255, 255, 0.03);
+    --bg-card-hover: rgba(0, 255, 102, 0.05); 
+    --primary: #00ff66; 
+    --accent: #008833; 
     --text-main: #ffffff;
-    --text-muted: #b7c3d6;
+    --text-muted: #a3b8a9; 
     --grad-glow: linear-gradient(90deg, var(--primary), var(--accent));
 }
 
@@ -26,7 +26,11 @@
     padding: 0;
     box-sizing: border-box;
     font-family: 'Poppins', sans-serif;
+}
+
+html {
     scroll-behavior: smooth;
+    scroll-padding-top: 90px; 
 }
 
 body{
@@ -51,9 +55,9 @@ body{
     width: 500px;
     height: 500px;
     border-radius: 50%;
-    filter: blur(120px);
+    filter: blur(140px);
     z-index: -1;
-    animation: floatGlow 8s ease-in-out infinite alternate;
+    animation: floatGlow 10s ease-in-out infinite alternate;
     pointer-events: none;
 }
 
@@ -61,7 +65,7 @@ body{
     background: var(--primary);
     top: -150px;
     left: -150px;
-    opacity: .15;
+    opacity: .12;
 }
 
 .glow2{
@@ -72,8 +76,9 @@ body{
 }
 
 @keyframes floatGlow{
-    from { transform: translateY(0px); }
-    to { transform: translateY(30px); }
+    0% { transform: translate(0px, 0px) scale(1); }
+    50% { transform: translate(40px, -30px) scale(1.1); }
+    100% { transform: translate(-20px, 30px) scale(1); }
 }
 
 /* GLOBAL FADE INTERSECTION STYLES */
@@ -98,10 +103,10 @@ header{
     display: flex;
     justify-content: space-between;
     align-items: center;
-    background: rgba(0, 0, 0, .45);
+    background: rgba(2, 5, 3, .6);
     backdrop-filter: blur(14px);
     -webkit-backdrop-filter: blur(14px);
-    border-bottom: 1px solid rgba(255, 255, 255, .06);
+    border-bottom: 1px solid rgba(0, 255, 102, .08);
     z-index: 1000;
     animation: fadeDown 1s ease;
 }
@@ -207,14 +212,14 @@ nav a:focus-visible{
 
 .primary{
     background: var(--grad-glow);
-    color: var(--text-main);
-    box-shadow: 0 0 25px rgba(0, 247, 255, .35);
+    color: #000000; 
+    box-shadow: 0 0 25px rgba(0, 255, 102, .3);
 }
 
 .primary:hover,
 .primary:focus-visible{
     transform: translateY(-5px) scale(1.05);
-    box-shadow: 0 0 40px rgba(0, 247, 255, .5);
+    box-shadow: 0 0 40px rgba(0, 255, 102, .5);
     outline: none;
 }
 
@@ -228,7 +233,7 @@ nav a:focus-visible{
 
 .stat-card{
     background: var(--bg-card);
-    border: 1px solid rgba(255, 255, 255, .06);
+    border: 1px solid rgba(255, 255, 255, .05);
     border-radius: 30px;
     padding: 40px;
     text-align: center;
@@ -242,7 +247,7 @@ nav a:focus-visible{
     transform: translateY(-10px) scale(1.03);
     border-color: var(--primary);
     background: var(--bg-card-hover);
-    box-shadow: 0 0 35px rgba(0, 247, 255, .18);
+    box-shadow: 0 0 35px rgba(0, 255, 102, .15);
 }
 
 .stat-card h2{
@@ -251,7 +256,7 @@ nav a:focus-visible{
     margin-bottom: 10px;
 }
 
-/* VIDEOS */
+/* VIDEOS SECTION & 3D CUBES */
 .videos{
     padding: 20px 8% 100px;
     display: grid;
@@ -260,31 +265,76 @@ nav a:focus-visible{
 }
 
 .video-card{
-    background: #0e1325;
+    background: #060d08; 
     border-radius: 28px;
     overflow: hidden;
-    border: 1px solid rgba(255, 255, 255, .05);
+    border: 1px solid rgba(0, 255, 102, .05);
     transition: transform .4s ease, box-shadow .4s ease;
+    text-decoration: none; /* Clears default link line style */
+    color: inherit;
+    display: block;
 }
 
 .video-card:hover,
 .video-card:focus-within{
     transform: translateY(-10px) scale(1.02);
-    box-shadow: 0 0 30px rgba(0, 247, 255, .25);
+    box-shadow: 0 0 30px rgba(0, 255, 102, .2);
+    outline: none;
 }
 
-.thumb{
+.thumb {
     height: 220px;
-    background: linear-gradient(135deg, var(--primary), var(--accent));
+    background: #020503; 
     display: flex;
     justify-content: center;
     align-items: center;
-    font-size: 70px;
-    transition: .4s ease;
+    perspective: 800px; 
+    overflow: hidden;
+    border-bottom: 1px solid rgba(0, 255, 102, 0.1);
 }
 
-.video-card:hover .thumb{
-    transform: scale(1.05);
+.cube {
+    position: relative;
+    width: 60px;
+    height: 60px;
+    transform-style: preserve-3d;
+    animation: spinCube 8s linear infinite;
+    transition: transform 0.5s ease;
+}
+
+.cube-face {
+    position: absolute;
+    width: 60px;
+    height: 60px;
+    background: rgba(0, 255, 102, 0.03); 
+    border: 2px solid var(--primary); 
+    box-shadow: 0 0 15px rgba(0, 255, 102, 0.3); 
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 28px; 
+}
+
+.face-front  { transform: rotateY(0deg) translateZ(30px); }
+.face-back   { transform: rotateY(180deg) translateZ(30px); }
+.face-left   { transform: rotateY(-90deg) translateZ(30px); }
+.face-right  { transform: rotateY(90deg) translateZ(30px); }
+.face-top    { transform: rotateX(90deg) translateZ(30px); }
+.face-bottom { transform: rotateX(-90deg) translateZ(30px); }
+
+.video-card:hover .cube {
+    animation: spinCubeHover 2s linear infinite;
+    transform: scale(1.15);
+}
+
+@keyframes spinCube {
+    0% { transform: rotateX(0deg) rotateY(0deg) rotateZ(0deg); }
+    100% { transform: rotateX(360deg) rotateY(360deg) rotateZ(360deg); }
+}
+
+@keyframes spinCubeHover {
+    0% { transform: rotateX(0deg) rotateY(0deg) rotateZ(0deg); }
+    100% { transform: rotateX(360deg) rotateY(720deg) rotateZ(360deg); }
 }
 
 .video-content{
@@ -305,8 +355,8 @@ nav a:focus-visible{
 }
 
 .texture-card{
-    background: rgba(10, 16, 35, .9);
-    border: 2px solid rgba(0, 247, 255, .25);
+    background: rgba(4, 10, 6, .9);
+    border: 2px solid rgba(0, 255, 102, .2);
     border-radius: 30px;
     padding: 35px;
     display: flex;
@@ -322,7 +372,7 @@ nav a:focus-visible{
     content: '';
     position: absolute;
     inset: 0;
-    background: linear-gradient(90deg, rgba(0, 247, 255, .12), rgba(138, 46, 255, .12));
+    background: linear-gradient(90deg, rgba(0, 255, 102, .08), rgba(0, 136, 51, .08));
     opacity: 0;
     transition: .4s ease;
 }
@@ -331,7 +381,7 @@ nav a:focus-visible{
 .texture-card:focus-within{
     transform: translateY(-10px) scale(1.02);
     border-color: var(--primary);
-    box-shadow: 0 0 35px rgba(0, 247, 255, .25);
+    box-shadow: 0 0 35px rgba(0, 255, 102, .2);
 }
 
 .texture-card:hover::before{
@@ -363,17 +413,17 @@ nav a:focus-visible{
     cursor: pointer;
     font-size: 17px;
     font-weight: 700;
-    color: var(--text-main);
+    color: #000000; 
     background: var(--grad-glow);
     transition: .35s ease;
-    box-shadow: 0 0 25px rgba(0, 247, 255, .35);
+    box-shadow: 0 0 25px rgba(0, 255, 102, .3);
     white-space: nowrap;
 }
 
 .download-btn:hover,
 .download-btn:focus-visible{
     transform: scale(1.08);
-    box-shadow: 0 0 40px rgba(0, 247, 255, .5);
+    box-shadow: 0 0 40px rgba(0, 255, 102, .5);
     outline: none;
 }
 
@@ -387,7 +437,7 @@ nav a:focus-visible{
 
 .about-box{
     background: var(--bg-card);
-    border: 1px solid rgba(255, 255, 255, .05);
+    border: 1px solid rgba(255, 255, 255, .04);
     padding: 40px;
     border-radius: 30px;
     transition: transform .4s ease, border-color .4s ease, background-color .4s ease;
@@ -413,7 +463,7 @@ nav a:focus-visible{
 .popup{
     position: fixed;
     inset: 0;
-    background: rgba(0, 0, 0, .75);
+    background: rgba(0, 0, 0, .85);
     display: flex;
     justify-content: center;
     align-items: center;
@@ -431,7 +481,7 @@ nav a:focus-visible{
 .popup-box{
     width: 90%;
     max-width: 450px;
-    background: #0e1325;
+    background: #060d08;
     border: 2px solid var(--primary);
     border-radius: 30px;
     padding: 40px;
@@ -475,11 +525,11 @@ nav a:focus-visible{
 
 .download-real{
     background: var(--grad-glow);
-    color: var(--text-main);
+    color: #000000;
 }
 
 .close-popup{
-    background: #1b2340;
+    background: #122116;
     color: var(--text-main);
 }
 
@@ -495,8 +545,8 @@ nav a:focus-visible{
 footer{
     text-align: center;
     padding: 40px;
-    border-top: 1px solid rgba(255, 255, 255, .06);
-    color: #8ea0b8;
+    border-top: 1px solid rgba(0, 255, 102, .08);
+    color: #728c79;
 }
 
 /* ANIMATIONS */
@@ -576,15 +626,15 @@ footer{
 
     <section class="stats" id="stats">
         <div class="stat-card fade">
-            <h2>90</h2>
+            <h2>91</h2>
             <p>Subscribers</p>
         </div>
         <div class="stat-card fade">
-            <h2>15 k</h2>
+            <h2>15.2k</h2>
             <p>Total Views</p>
         </div>
         <div class="stat-card fade">
-            <h2>36</h2>
+            <h2>37</h2>
             <p>Videos Uploaded</p>
         </div>
         <div class="stat-card fade">
@@ -594,33 +644,62 @@ footer{
     </section>
 
     <section class="videos" id="videos">
-        <div class="video-card fade">
-            <div class="thumb" aria-hidden="true">🎮</div>
+        <a href="https://www.youtube.com/@BloxdisMaven" target="_blank" rel="noopener" class="video-card fade">
+            <div class="thumb">
+                <div class="cube">
+                    <div class="cube-face face-front">🎮</div>
+                    <div class="cube-face face-back">🎮</div>
+                    <div class="cube-face face-left">🎮</div>
+                    <div class="cube-face face-right">🎮</div>
+                    <div class="cube-face face-top"></div>
+                    <div class="cube-face face-bottom"></div>
+                </div>
+            </div>
             <div class="video-content">
                 <h3>Best Texture Packs</h3>
                 <p>The cleanest PvP texture packs.</p>
             </div>
-        </div>
-        <div class="video-card fade">
-            <div class="thumb" aria-hidden="true">🔥</div>
+        </a>
+
+        <a href="https://www.youtube.com/@BloxdisMaven" target="_blank" rel="noopener" class="video-card fade">
+            <div class="thumb">
+                <div class="cube">
+                    <div class="cube-face face-front">🔥</div>
+                    <div class="cube-face face-back">🔥</div>
+                    <div class="cube-face face-left">🔥</div>
+                    <div class="cube-face face-right">🔥</div>
+                    <div class="cube-face face-top"></div>
+                    <div class="cube-face face-bottom"></div>
+                </div>
+            </div>
             <div class="video-content">
                 <h3>Best PvP Clips</h3>
                 <p>Fast edits and insane gameplay.</p>
             </div>
-        </div>
-        <div class="video-card fade">
-            <div class="thumb" aria-hidden="true">🚀</div>
+        </a>
+
+        <a href="https://www.youtube.com/@BloxdisMaven" target="_blank" rel="noopener" class="video-card fade">
+            <div class="thumb">
+                <div class="cube">
+                    <div class="cube-face face-front">🚀</div>
+                    <div class="cube-face face-back">🚀</div>
+                    <div class="cube-face face-left">🚀</div>
+                    <div class="cube-face face-right">🚀</div>
+                    <div class="cube-face face-top"></div>
+                    <div class="cube-face face-bottom"></div>
+                </div>
+            </div>
             <div class="video-content">
                 <h3>Bloxd Bedwars Gameplay</h3>
                 <p>High level gameplay content.</p>
             </div>
-        </div>
+        </a>
     </section>
 
     <section class="texture-section">
         <div class="texture-card fade">
             <div class="texture-left">
-                <h3>Icyx 16x</h3>
+                <h2>Icyx 16x</h2>
                 <p>Download Maven's smooth Bloxd PvP texture pack with clean swords, glowing UI, better FPS visuals, and competitive gameplay improvements.</p>
             </div>
             <button class="download-btn" onclick="openPopup()">Download Pack →</button>
@@ -673,7 +752,7 @@ document.addEventListener("DOMContentLoaded", () => {
         entries.forEach(entry => {
             if (entry.isIntersecting) {
                 entry.target.classList.add('show');
-                observer.unobserve(entry.target); // Stops tracking once shown for smooth rendering
+                observer.unobserve(entry.target); 
             }
         });
     }, observerOptions);
@@ -681,14 +760,32 @@ document.addEventListener("DOMContentLoaded", () => {
     fadeElements.forEach(el => observer.observe(el));
 });
 
-/* POPUP CONTROLS */
+/* POPUP CONTROLS WITH FOCUS MANAGEMENT & ACCESSIBILITY */
+let lastFocusedElement;
+
 function openPopup(){
-    document.getElementById('popup').classList.add('show');
+    lastFocusedElement = document.activeElement; 
+    const popup = document.getElementById('popup');
+    popup.classList.add('show');
+    
+    setTimeout(() => {
+        popup.querySelector('.download-real').focus();
+    }, 50);
 }
 
 function closePopup(){
     document.getElementById('popup').classList.remove('show');
+    if (lastFocusedElement) lastFocusedElement.focus();
 }
+
+document.addEventListener('keydown', (e) => {
+    if (e.key === 'Escape') {
+        const popup = document.getElementById('popup');
+        if (popup.classList.contains('show')) {
+            closePopup();
+        }
+    }
+});
 </script>
 
 </body>

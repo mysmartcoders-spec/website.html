@@ -270,7 +270,7 @@ nav a:focus-visible{
     overflow: hidden;
     border: 1px solid rgba(0, 255, 102, .05);
     transition: transform .4s ease, box-shadow .4s ease;
-    text-decoration: none; /* Clears default link line style */
+    text-decoration: none;
     color: inherit;
     display: block;
 }
@@ -731,7 +731,8 @@ footer{
         <h2 id="popup-title">Texture Pack</h2>
         <p>Click below to download the official Maven texture pack.</p>
         <div class="popup-buttons">
-            <a href="Icyx 16x (updated).rar" download="Icyx 16x (updated).rar" class="download-real">Download</a>>
+            <!-- CHANGED THIS LINE BELOW TO TARGET THE EXACT FILE NAME AND REMOVED THE TYPO -->
+            <a href="Icyx%2016X.rar" download="Icyx 16X.rar" class="download-real">Download</a>
             <button class="close-popup" onclick="closePopup()">Close</button>
         </div>
     </div>
